@@ -74,41 +74,45 @@
     </div>
 
     <h4>You are: </h4>
-    <h3 id="result"></h3>
+    <h3 id="display" text="dark"></h3>
 <br>
 <br>
-    <h3 id="result2"></h3>
+    <h3 id="advice" text="green"></h3>
 
     <br>
     <br>
+    <br>
+    <script>
 
-
-            <script>
-                function BMI_CALC(){
-                    var weight = Number(document.getElementById("weight").value);
-                    var height = Number(document.getElementById("height").value);
-                    var result = weight / (Math.pow(height, 2))
-                    document.getElementById("result").innerHTML = 'You are: ' + result
-                }
-
-                if (result < 18.5){
-                    getElementById("result2").innerHTML = 'You are underweight. Try to gain more weight.'
-                }
-
-                if (result >= 18.5){
-                    getElementById("result2").innerHTML = 'You are at normal weight. Maintain this for a healthier lifestyle.'
-                }
-
-                if (result >= 25.5){
-                    getElementById("result2").innerHTML = 'You are overweight. Try to eat less and shed more weight.'
-                }
-                
-                else (result >= 30);{
-                    getElementById("result2").innerHTML = 'You are obese. Lose weight and go on a diet to get back to a healthy lifestyle.'
-                }
-                
-                
-            </script>
+      function BMI_CALC() {
+          var weight = Number(document.getElementById("kg").value);
+          var height = Number(document.getElementById("met").value);
+  
+          if (!weight || !height || height <= 0) {
+              document.getElementById("advice").innerHTML = "Please enter valid weight and height.";
+              document.getElementById("display").innerHTML = "";
+              return;
+          }
+  
+          var result = Math.round((weight / Math.pow(height, 2)) * 10) / 10;
+  
+          let advice = "";
+  
+          if (result < 18.5) {
+              advice = "You are underweight. Try to gain more weight.";
+          } else if (result < 25) {
+              advice = "You are at normal weight. Maintain this for a healthier lifestyle.";
+          } else if (result < 30) {
+              advice = "You are overweight. Try to eat less and shed more weight.";
+          } else {
+              advice = "You are obese. Lose weight and go on a diet to get back to a healthy lifestyle.";
+          }
+  
+          document.getElementById("display").innerHTML = "BMI: " + result;
+          document.getElementById("advice").innerHTML = advice;
+      }
+  </script>
+  
 
     </div>
 </body>
